@@ -1,0 +1,50 @@
+{
+  "name": "@cynos-ai/guidance",
+  "version": "0.1.0",
+  "description": "Portable engineering judgment and project communication guidance for AI coding agents.",
+  "keywords": [
+    "pi-package",
+    "pi-extension",
+    "agent-skills",
+    "coding-agent",
+    "system-prompt",
+    "cynos"
+  ],
+  "license": "MIT",
+  "author": "Jay Shen <shenjiecode@gmail.com>",
+  "type": "module",
+  "engines": {
+    "node": ">=22.19.0"
+  },
+  "homepage": "https://github.com/cynos-ai/guidance#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cynos-ai/guidance.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cynos-ai/guidance/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "extensions/",
+    "principles/",
+    "skills/",
+    "README.md",
+    "LICENSE"
+  ],
+  "pi": {
+    "extensions": [
+      "./extensions/pi.js"
+    ],
+    "skills": [
+      "./skills"
+    ]
+  },
+  "scripts": {
+    "test": "node --test",
+    "verify": "npm test",
+    "pack:dry-run": "npm pack --dry-run"
+  }
+}

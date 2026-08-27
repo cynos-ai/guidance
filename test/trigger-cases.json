@@ -1,0 +1,35 @@
+{
+  "engineering-judgment": {
+    "positive": [
+      "Fix this intermittent authentication failure.",
+      "Refactor the job runner without changing behavior.",
+      "Plan a reversible schema migration."
+    ],
+    "negative": [
+      "Explain what OAuth means for this product owner."
+    ],
+    "adjacent": [
+      "Summarize this report without changing the system."
+    ],
+    "ambiguous": [
+      "What should we improve here?"
+    ]
+  },
+  "project-owner-communication": {
+    "positive": [
+      "Explain this project's architecture without internal module names.",
+      "What changed for users after this fix?",
+      "Why did this job fail? Give me the conceptual cause first."
+    ],
+    "negative": [
+      "Write a public API reference document.",
+      "Generate a Conventional Commit message."
+    ],
+    "adjacent": [
+      "Implement the fix and report the result to me."
+    ],
+    "ambiguous": [
+      "Walk me through this component."
+    ]
+  }
+}
