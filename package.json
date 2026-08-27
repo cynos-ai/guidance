@@ -1,6 +1,6 @@
 {
   "name": "@cynos-ai/guidance",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Portable engineering judgment and project communication guidance for AI coding agents.",
   "keywords": [
     "pi-package",
