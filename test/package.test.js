@@ -26,6 +26,9 @@ test("package exposes one Pi extension and only shipped Skills", async () => {
 
   assert.deepEqual(pkg.pi.extensions, ["./extensions/pi.js"]);
   assert.deepEqual(pkg.pi.skills, ["./skills"]);
+  assert.ok(pkg.keywords.includes("pi-package"));
+  assert.ok(pkg.files.includes("README.md"));
+  assert.ok(pkg.files.includes("README-zh-CN.md"));
   assert.equal(pkg.files.includes(".pi/"), false);
 });
 
@@ -64,5 +67,26 @@ test("trigger cases cover positive, negative, adjacent, and ambiguous boundaries
     for (const kind of ["positive", "negative", "adjacent", "ambiguous"]) {
       assert.ok(Array.isArray(cases[name][kind]) && cases[name][kind].length > 0);
     }
+  }
+});
+
+test("all prompt and Skill content is written in English", async () => {
+  const files = [path.join(root, "principles/core.md")];
+
+  for (const base of [path.join(root, "skills"), path.join(root, ".pi/skills")]) {
+    const stack = [base];
+    while (stack.length > 0) {
+      const current = stack.pop();
+      for (const entry of await readdir(current, { withFileTypes: true })) {
+        const target = path.join(current, entry.name);
+        if (entry.isDirectory()) stack.push(target);
+        else if (entry.name.endsWith(".md")) files.push(target);
+      }
+    }
+  }
+
+  for (const file of files) {
+    const text = await readFile(file, "utf8");
+    assert.doesNotMatch(text, /[\u3400-\u9fff]/u, `${path.relative(root, file)} contains Chinese text`);
   }
 });

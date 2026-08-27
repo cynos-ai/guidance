@@ -1,16 +1,63 @@
+[English](README.md) | [简体中文](README-zh-CN.md)
+
 # Cynos Guidance
 
 Portable engineering judgment and project communication guidance for AI coding agents.
 
-Cynos Guidance keeps the always-on prompt small, then loads cohesive Agent Skills when a task needs more context. It teaches durable judgment rather than prescribing one framework, repository layout, or step-by-step engineering process.
+Cynos Guidance is a Pi package that combines a small always-on system guidance block with cohesive Agent Skills. It teaches durable judgment rather than prescribing one framework, repository layout, or detailed engineering workflow.
 
-Pi is the first supported harness. The guidance content remains harness-neutral so other adapters can be added without rewriting it.
+Pi is the first supported harness. The guidance content remains harness-neutral so future adapters can reuse it without rewriting the principles or Skills.
 
-## What it includes
+## Install and update with Pi
+
+Install the published npm package:
+
+```bash
+pi install npm:@cynos-ai/guidance
+```
+
+Update it later:
+
+```bash
+pi update npm:@cynos-ai/guidance
+```
+
+To update all installed Pi packages instead:
+
+```bash
+pi update --extensions
+```
+
+You can also install the current GitHub version:
+
+```bash
+pi install https://github.com/cynos-ai/guidance
+```
+
+Restart Pi after installation. Use `pi config` to inspect or disable individual resources.
+
+## How the Pi package works
+
+`package.json` declares one extension and the public Skills:
+
+```json
+{
+  "pi": {
+    "extensions": ["./extensions/pi.js"],
+    "skills": ["./skills"]
+  }
+}
+```
+
+The extension injects [`principles/core.md`](principles/core.md) into the system prompt once per turn and uses a stable marker to avoid duplicate injection. Pi discovers the two standard Agent Skills under `skills/`.
+
+The extension registers no tools, accesses no network, and edits no project files. Prompt guidance is advice, not a security or authorization boundary.
+
+## Included guidance
 
 ### Always-on core
 
-The Pi extension injects a compact set of principles from [`principles/core.md`](principles/core.md):
+The compact core asks the agent to:
 
 - inspect actual project context before assuming;
 - fit changes to existing responsibility boundaries;
@@ -23,42 +70,24 @@ The Pi extension injects a compact set of principles from [`principles/core.md`]
 
 | Skill | Responsibility |
 |---|---|
-| [`engineering-judgment`](skills/engineering-judgment/SKILL.md) | Guide substantive software design, change, diagnosis, refactoring, optimization, migration, and verification as one coherent engineering job. |
+| [`engineering-judgment`](skills/engineering-judgment/SKILL.md) | Guide software design, change, diagnosis, refactoring, optimization, migration, and verification as one coherent engineering job. |
 | [`project-owner-communication`](skills/project-owner-communication/SKILL.md) | Explain project behavior and conceptual architecture to a domain-expert owner who does not work from code or internal project names. |
 
-The Skills are independent: one shapes engineering work, the other shapes conversation. They may activate together without depending on each other.
+The Skills are independent: one shapes engineering work, and the other shapes conversation. They can activate together without depending on each other.
 
-## Install
+Project-maintenance Skills under `.pi/skills/` help maintain Cynos Guidance itself and are excluded from the npm package.
 
-From GitHub:
+## Design boundary
 
-```bash
-pi install https://github.com/cynos-ai/guidance
-```
+Cynos Guidance favors:
 
-After the first npm release:
+- portable judgment over technology-specific recipes;
+- a small permanent prompt plus on-demand detail;
+- cohesive Skills organized by user intent;
+- observable behavior, explicit boundaries, and clear stop conditions;
+- English for all system guidance and Skill content.
 
-```bash
-pi install npm:@cynos-ai/guidance
-```
-
-Restart Pi after installation. Use `pi config` to inspect or disable individual resources.
-
-## Package behavior
-
-The package contributes:
-
-- one Pi extension: `extensions/pi.js`;
-- one compact always-on guidance block;
-- two standard Agent Skills under `skills/`.
-
-The extension only modifies the system prompt. It registers no tools, accesses no network, edits no project files, and treats prompt guidance as advice rather than a security boundary.
-
-Project-maintenance Skills under `.pi/skills/` are not included in the npm package.
-
-## Non-goals
-
-Cynos Guidance is not:
+It is not:
 
 - a complete coding-agent runtime;
 - a framework-specific best-practices handbook;
@@ -73,11 +102,21 @@ Requirements: Node.js 22.19 or newer.
 
 ```bash
 npm install
-npm test
+npm run verify
 npm run pack:dry-run
 ```
 
-The tests validate Pi prompt injection, Skill metadata and cohesion boundaries, trigger-case coverage, and the public package surface.
+The tests validate Pi prompt injection, Skill metadata and cohesion boundaries, trigger-case coverage, English-only prompt and Skill content, and the public package surface.
+
+## Release
+
+Releases use npm Trusted Publishing through [`.github/workflows/release.yml`](.github/workflows/release.yml). Configure the npm Trusted Publisher with:
+
+- repository: `cynos-ai/guidance`;
+- workflow filename: `release.yml`;
+- environment: leave empty.
+
+After configuration, pushing a version tag such as `v0.1.0` verifies the package, publishes it to npm, and creates a GitHub Release containing the tarball.
 
 ## License
 
