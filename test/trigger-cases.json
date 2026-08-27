@@ -13,11 +13,20 @@
     ],
     "ambiguous": [
       "What should we improve here?"
+    ],
+    "conflict": [
+      "Use the architecture mandated by this repository even if another pattern is usually preferred."
+    ],
+    "over_following": [
+      "Fix only this authentication bug; do not clean up adjacent code."
     ]
   },
   "project-owner-communication": {
     "positive": [
       "Explain this project's architecture without internal module names.",
+      "Research the model options and recommend a platform route for the project owner.",
+      "Use Socratic questions to help me clarify this product outcome.",
+      "Grill me on this design and identify the assumptions most likely to break it.",
       "What changed for users after this fix?",
       "Why did this job fail? Give me the conceptual cause first."
     ],
@@ -30,6 +39,12 @@
     ],
     "ambiguous": [
       "Walk me through this component."
+    ],
+    "conflict": [
+      "Explain the owner impact first, then include the exact implementation paths I explicitly requested."
+    ],
+    "over_following": [
+      "Answer only whether external behavior changed; do not start a design workshop."
     ]
   }
 }

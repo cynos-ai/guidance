@@ -71,9 +71,11 @@ pi install https://github.com/cynos-ai/guidance
 | Skill | 职责 |
 |---|---|
 | [`engineering-judgment`](skills/engineering-judgment/SKILL.md) | 把软件设计、修改、诊断、重构、优化、迁移和验证作为一项完整的工程工作来处理。 |
-| [`project-owner-communication`](skills/project-owner-communication/SKILL.md) | 面向懂行业但不依赖代码和项目内部名称理解系统的项目所有者，解释项目行为和概念架构。 |
+| [`project-owner-communication`](skills/project-owner-communication/SKILL.md) | 面向懂行业但不依赖代码和内部名称理解系统的项目所有者，解释、调研、共同塑造、决策或压力测试项目方向。 |
 
-两个 Skills 相互独立：一个规范工程工作，一个规范沟通表达。它们可以同时触发，但不互相依赖。
+沟通 Skill 由一套结果优先的表达内核和按需对话模式组成，覆盖苏格拉底式探索与决策、技术调研简报，以及 grill 或 premortem 等严格压力测试。这避免了多个 Skills 在同一段对话中争夺提问节奏。
+
+两个公开 Skills 仍相互独立：一个规范工程工作，一个规范面向 Owner 的沟通。它们可以同时触发，但不互相依赖。
 
 `.pi/skills/` 下的项目维护 Skills 只用于维护 Cynos Guidance 自身，不会进入 npm 包。
 

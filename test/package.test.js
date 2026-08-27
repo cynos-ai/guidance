@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { readFile, readdir } from "node:fs/promises";
+import { access, readFile, readdir } from "node:fs/promises";
 import path from "node:path";
 import test from "node:test";
 
@@ -52,6 +52,19 @@ test("shipped Skills have valid, distinct discovery metadata", async () => {
   assert.notEqual(descriptions[0], descriptions[1]);
 });
 
+test("Skill Markdown links resolve inside each Skill package", async () => {
+  for (const name of expectedSkills) {
+    const skillDir = path.join(root, "skills", name);
+    const text = await readFile(path.join(skillDir, "SKILL.md"), "utf8");
+    const links = [...text.matchAll(/\]\(([^)]+\.md)\)/g)].map((match) => match[1]);
+
+    for (const link of links) {
+      assert.equal(path.isAbsolute(link), false);
+      await access(path.resolve(skillDir, link));
+    }
+  }
+});
+
 test("core guidance stays compact and routes both Skills", async () => {
   const core = await readFile(path.join(root, "principles/core.md"), "utf8");
 
@@ -59,12 +72,19 @@ test("core guidance stays compact and routes both Skills", async () => {
   for (const name of expectedSkills) assert.match(core, new RegExp(`\\b${name}\\b`));
 });
 
-test("trigger cases cover positive, negative, adjacent, and ambiguous boundaries", async () => {
+test("trigger cases cover activation, adjacency, conflict, and over-following boundaries", async () => {
   const cases = JSON.parse(await readFile(path.join(root, "test/trigger-cases.json"), "utf8"));
 
   assert.deepEqual(Object.keys(cases).sort(), expectedSkills);
   for (const name of expectedSkills) {
-    for (const kind of ["positive", "negative", "adjacent", "ambiguous"]) {
+    for (const kind of [
+      "positive",
+      "negative",
+      "adjacent",
+      "ambiguous",
+      "conflict",
+      "over_following",
+    ]) {
       assert.ok(Array.isArray(cases[name][kind]) && cases[name][kind].length > 0);
     }
   }

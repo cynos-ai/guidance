@@ -71,9 +71,11 @@ The compact core asks the agent to:
 | Skill | Responsibility |
 |---|---|
 | [`engineering-judgment`](skills/engineering-judgment/SKILL.md) | Guide software design, change, diagnosis, refactoring, optimization, migration, and verification as one coherent engineering job. |
-| [`project-owner-communication`](skills/project-owner-communication/SKILL.md) | Explain project behavior and conceptual architecture to a domain-expert owner who does not work from code or internal project names. |
+| [`project-owner-communication`](skills/project-owner-communication/SKILL.md) | Explain, research, jointly shape, decide, or stress-test project direction with a domain-expert owner who does not work from code or internal project names. |
 
-The Skills are independent: one shapes engineering work, and the other shapes conversation. They can activate together without depending on each other.
+The communication Skill combines one outcome-first presentation kernel with on-demand dialogue modes for Socratic discovery and decisions, technical research briefings, and rigorous stress tests such as grilling or premortems. This avoids competing Skills imposing different question cadence on the same conversation.
+
+The two public Skills remain independent: one shapes engineering work, and the other shapes owner-facing conversation. They can activate together without depending on each other.
 
 Project-maintenance Skills under `.pi/skills/` help maintain Cynos Guidance itself and are excluded from the npm package.
 
