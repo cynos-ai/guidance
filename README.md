@@ -112,9 +112,11 @@ The tests validate Pi prompt injection, Skill metadata and cohesion boundaries, 
 
 Releases use npm Trusted Publishing through [`.github/workflows/release.yml`](.github/workflows/release.yml). Configure the npm Trusted Publisher with:
 
-- repository: `cynos-ai/guidance`;
+- GitHub organization or user: `cynos-ai`;
+- repository: `guidance`;
 - workflow filename: `release.yml`;
-- environment: leave empty.
+- environment: leave empty;
+- allowed action: `npm publish`.
 
 After configuration, pushing a version tag such as `v0.1.0` verifies the package, publishes it to npm, and creates a GitHub Release containing the tarball.
 

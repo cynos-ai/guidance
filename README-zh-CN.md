@@ -112,9 +112,11 @@ npm run pack:dry-run
 
 项目通过 [`.github/workflows/release.yml`](.github/workflows/release.yml) 使用 npm Trusted Publishing。请在 npm Trusted Publisher 中配置：
 
-- repository：`cynos-ai/guidance`；
+- GitHub organization or user：`cynos-ai`；
+- repository：`guidance`；
 - workflow filename：`release.yml`；
-- environment：留空。
+- environment：留空；
+- allowed action：`npm publish`。
 
 配置完成后，推送 `v0.1.0` 这样的版本标签会自动验证并发布 npm 包，同时创建附带 tarball 的 GitHub Release。
 
