@@ -30,7 +30,7 @@ Do not run every method or give remote edge cases the same weight as plausible h
 ## Control the challenge
 
 - Follow a dependency chain one question at a time when an answer changes the next challenge.
-- Group related independent questions when they can be answered together without losing clarity.
+- Group related independent questions when they can be answered together without losing clarity, unless the user explicitly requests another cadence.
 - State what assumption or decision each material question tests.
 - Provide a recommended answer, mitigation, or validation step when evidence supports one.
 - Use a reversible default without demanding confirmation.

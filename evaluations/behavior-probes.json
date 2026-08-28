@@ -292,6 +292,73 @@
       "forbiddenBehavior": [
         "Add adjacent refactors, dependency upgrades, or speculative abstractions after acceptance passes."
       ]
+    },
+    {
+      "id": "guided-discovery-explicit-socratic-article",
+      "focusSkill": "guided-discovery",
+      "boundary": "positive",
+      "turns": [
+        "Use Socratic questions to help me define the central argument of this article before suggesting an outline."
+      ],
+      "expectedSkills": ["guided-discovery"],
+      "expectedBehavior": [
+        "Use selective clarification, assumption, evidence, alternative, or implication questions to make the intended argument explicit.",
+        "Stop discovery before outlining unless the user expands the request."
+      ],
+      "forbiddenBehavior": [
+        "Generate an article outline before the central argument is clear.",
+        "Ask every generic Socratic question category regardless of relevance."
+      ]
+    },
+    {
+      "id": "stress-test-explicit-study-premortem",
+      "focusSkill": "stress-test",
+      "boundary": "positive",
+      "turns": [
+        "Run a premortem on my study strategy: assume I failed the exam, identify the likely causes, and improve the plan."
+      ],
+      "expectedSkills": ["stress-test"],
+      "expectedBehavior": [
+        "Describe the observable failure, identify plausible high-impact causes, and convert them into mitigations and validation steps.",
+        "Return the strongest surviving study strategy."
+      ],
+      "forbiddenBehavior": [
+        "Turn the premortem into generic pessimism or an exhaustive list of remote risks.",
+        "Replace the study goal without demonstrating a material problem."
+      ]
+    },
+    {
+      "id": "decision-support-engineering-migration-composition",
+      "focusSkill": "decision-support",
+      "boundary": "positive",
+      "turns": [
+        "Help me choose between the two viable database migration paths, recommend one using our compatibility and rollback criteria, and then implement the selected path."
+      ],
+      "expectedSkills": ["decision-support", "engineering-judgment"],
+      "expectedBehavior": [
+        "Use decision-support to organize the choice and engineering-judgment to inspect repository evidence, implement the selected path, preserve compatibility, and verify rollback behavior.",
+        "Let the dialogue mode control question cadence while engineering judgment controls technical completeness."
+      ],
+      "forbiddenBehavior": [
+        "Start implementation before the migration path is selected.",
+        "Treat the decision comparison as a substitute for repository investigation or migration verification."
+      ]
+    },
+    {
+      "id": "guided-discovery-artifact-style-boundary",
+      "focusSkill": "guided-discovery",
+      "boundary": "negative",
+      "turns": [
+        "Write this API reference in the repository's formal documentation style. Preserve its required sections and terminology."
+      ],
+      "expectedSkills": [],
+      "expectedBehavior": [
+        "Follow the artifact's formal audience, structure, terminology, and repository conventions."
+      ],
+      "forbiddenBehavior": [
+        "Rewrite the API reference as a conversational answer, decision workshop, or guided interview.",
+        "Apply outside-in dialogue formatting when it conflicts with the requested document structure."
+      ]
     }
   ]
 }

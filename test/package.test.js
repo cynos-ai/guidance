@@ -1,9 +1,12 @@
 import assert from "node:assert/strict";
+import { execFile } from "node:child_process";
 import { access, readFile, readdir } from "node:fs/promises";
 import path from "node:path";
 import test from "node:test";
+import { promisify } from "node:util";
 
 const root = path.resolve(import.meta.dirname, "..");
+const execFileAsync = promisify(execFile);
 const expectedSkills = new Map([
   ["decision-support", "skills/communication/decision-support/SKILL.md"],
   ["engineering-judgment", "skills/engineering/engineering-judgment/SKILL.md"],
@@ -63,9 +66,37 @@ test("package exposes one Pi extension and the recursive Skill root", async () =
   assert.deepEqual(pkg.pi.extensions, ["./extensions/pi.js"]);
   assert.deepEqual(pkg.pi.skills, ["./skills"]);
   assert.ok(pkg.keywords.includes("pi-package"));
-  assert.ok(pkg.files.includes("README.md"));
-  assert.ok(pkg.files.includes("README-zh-CN.md"));
-  assert.equal(pkg.files.includes(".pi/"), false);
+  assert.deepEqual(pkg.files, [
+    "extensions/",
+    "principles/",
+    "skills/",
+    "README.md",
+    "README-zh-CN.md",
+    "LICENSE",
+  ]);
+});
+
+test("npm dry-run tarball contains exactly the public file whitelist", async () => {
+  const { stdout } = await execFileAsync(
+    "npm",
+    ["pack", "--dry-run", "--json", "--ignore-scripts"],
+    { cwd: root },
+  );
+  const [packed] = JSON.parse(stdout);
+  const paths = packed.files.map((file) => file.path).sort();
+
+  assert.deepEqual(paths, [
+    "LICENSE",
+    "README-zh-CN.md",
+    "README.md",
+    "extensions/pi.js",
+    "package.json",
+    "principles/core.md",
+    "skills/communication/decision-support/SKILL.md",
+    "skills/communication/guided-discovery/SKILL.md",
+    "skills/communication/stress-test/SKILL.md",
+    "skills/engineering/engineering-judgment/SKILL.md",
+  ]);
 });
 
 test("public Skill families contain exactly the expected recursively discovered Skills", async () => {
