@@ -4,7 +4,7 @@ Cynos Guidance packages short, harness-neutral system guidance and cohesive Agen
 
 ## Active plan
 
-Before modifying the unreleased `0.2.0` guidance or public Skill layout, read and follow [`docs/plans/v0.2.0-guidance-restructure.md`](docs/plans/v0.2.0-guidance-restructure.md). It defines the approved target architecture, file operations, ownership boundaries, tests, and release gate. Do not publish `0.2.0` until the project owner reviews the implemented prompt and Skill contents.
+Before modifying the unreleased `0.2.0` guidance or public Skill layout, read and follow [`docs/plans/v0.2.0-guidance-restructure.md`](docs/plans/v0.2.0-guidance-restructure.md). It defines the proposed target architecture, file operations, ownership boundaries, verification, and release gate. Do not publish `0.2.0` until the project owner reviews the implemented prompt and Skill contents.
 
 ## Content layers
 
