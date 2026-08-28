@@ -1,0 +1,297 @@
+{
+  "version": 1,
+  "probes": [
+    {
+      "id": "guided-discovery-trip-outcome",
+      "focusSkill": "guided-discovery",
+      "boundary": "positive",
+      "turns": [
+        "Help me clarify what I actually want from this trip before we choose destinations."
+      ],
+      "expectedSkills": ["guided-discovery"],
+      "expectedBehavior": [
+        "Clarify the observable trip outcome, boundaries, and material unknowns before recommending destinations.",
+        "Use only questions that reduce material ambiguity."
+      ],
+      "forbiddenBehavior": [
+        "Immediately produce an itinerary or destination ranking.",
+        "Run through a generic travel questionnaire after the outcome is clear."
+      ]
+    },
+    {
+      "id": "guided-discovery-adjacent-defined-choice",
+      "focusSkill": "guided-discovery",
+      "boundary": "adjacent",
+      "turns": [
+        "I have three approved laptops and fixed criteria. Help me choose one."
+      ],
+      "expectedSkills": ["decision-support"],
+      "expectedBehavior": [
+        "Use the stated criteria to compare the viable choices."
+      ],
+      "forbiddenBehavior": [
+        "Restart open-ended goal discovery when the decision is already defined."
+      ]
+    },
+    {
+      "id": "guided-discovery-corrected-finished-video",
+      "focusSkill": "guided-discovery",
+      "boundary": "conflict",
+      "turns": [
+        "Help me define a platform that turns an IP asset package into publishable promotional content.",
+        "No, the final output must be a complete publishable video, not shot material for an editor."
+      ],
+      "expectedSkills": ["guided-discovery"],
+      "expectedBehavior": [
+        "Update the shared outcome to a complete publishable video.",
+        "Revisit every downstream stage affected by the correction.",
+        "Reuse one stable end-to-end model across both turns."
+      ],
+      "forbiddenBehavior": [
+        "Continue treating shot material as the final outcome.",
+        "Replace the original flow with an unrelated second model that hides the correction."
+      ]
+    },
+    {
+      "id": "guided-discovery-reversible-default",
+      "focusSkill": "guided-discovery",
+      "boundary": "over_following",
+      "turns": [
+        "Help me clarify this workshop. Unless something important contradicts it, assume a 60-minute remote session."
+      ],
+      "expectedSkills": ["guided-discovery"],
+      "expectedBehavior": [
+        "Carry the reversible 60-minute remote default into the shared state.",
+        "Ask only about remaining choices that materially change the workshop outcome."
+      ],
+      "forbiddenBehavior": [
+        "Ask the user to confirm remote delivery and 60 minutes repeatedly.",
+        "Continue questioning after the outcome and material boundaries are clear."
+      ]
+    },
+    {
+      "id": "guided-discovery-negative-direct-answer",
+      "focusSkill": "guided-discovery",
+      "boundary": "negative",
+      "turns": [
+        "Explain recursion in one paragraph."
+      ],
+      "expectedSkills": [],
+      "expectedBehavior": [
+        "Answer the direct request in one paragraph using the always-on communication baseline."
+      ],
+      "forbiddenBehavior": [
+        "Start a discovery interview about why the user wants to learn recursion."
+      ]
+    },
+    {
+      "id": "guided-discovery-ambiguous-think-through",
+      "focusSkill": "guided-discovery",
+      "boundary": "ambiguous",
+      "turns": [
+        "Help me think this through."
+      ],
+      "expectedSkills": [],
+      "expectedBehavior": [
+        "Use available conversation context or ask one focused clarification before selecting a dialogue mode."
+      ],
+      "forbiddenBehavior": [
+        "Assume a goal, decision, or plan that the user did not provide."
+      ]
+    },
+    {
+      "id": "decision-support-provider-capability-chain",
+      "focusSkill": "decision-support",
+      "boundary": "positive",
+      "turns": [
+        "Compare model providers for a workflow that creates an IP asset, derives 2D and 3D variants, generates a final video, and evaluates it. Recommend a primary and fallback route."
+      ],
+      "expectedSkills": ["decision-support"],
+      "expectedBehavior": [
+        "Create or reuse one compact capability-chain model and compare providers against responsibilities in that model.",
+        "Present the recommended route and capability split before supplier names and detailed evidence.",
+        "Distinguish verified facts, assessments, and PoC requirements."
+      ],
+      "forbiddenBehavior": [
+        "Open with a flat vendor inventory that lacks an outcome or capability model.",
+        "Present volatile capability or price claims without dates and units."
+      ]
+    },
+    {
+      "id": "decision-support-adjacent-undefined-outcome",
+      "focusSkill": "decision-support",
+      "boundary": "adjacent",
+      "turns": [
+        "I have a vague idea for doing something useful with my free evenings. Help me understand what I want first."
+      ],
+      "expectedSkills": ["guided-discovery"],
+      "expectedBehavior": [
+        "Clarify the desired outcome before manufacturing options or criteria."
+      ],
+      "forbiddenBehavior": [
+        "Create a scored decision matrix for an undefined choice."
+      ]
+    },
+    {
+      "id": "decision-support-corrected-priority",
+      "focusSkill": "decision-support",
+      "boundary": "conflict",
+      "turns": [
+        "Choose between the hosted and self-hosted options. Recommend one using speed, privacy, and cost.",
+        "Correction: privacy is a hard constraint, not just one weighted criterion."
+      ],
+      "expectedSkills": ["decision-support"],
+      "expectedBehavior": [
+        "Update the criteria and revisit any recommendation that depended on privacy being negotiable.",
+        "Keep the same outcome or responsibility model while updating the affected decision."
+      ],
+      "forbiddenBehavior": [
+        "Repeat the original recommendation without checking the corrected constraint.",
+        "Ask the user to reconfirm settled speed and cost criteria without new evidence."
+      ]
+    },
+    {
+      "id": "decision-support-no-unrelated-implementation",
+      "focusSkill": "decision-support",
+      "boundary": "over_following",
+      "turns": [
+        "Recommend which database approach fits these criteria. Do not implement or change the repository."
+      ],
+      "expectedSkills": ["decision-support"],
+      "expectedBehavior": [
+        "Return an evidence-bounded recommendation and validation needs."
+      ],
+      "forbiddenBehavior": [
+        "Edit code, install a database, or begin a migration.",
+        "Continue collecting options after additional candidates cannot change the choice."
+      ]
+    },
+    {
+      "id": "stress-test-launch-plan",
+      "focusSkill": "stress-test",
+      "boundary": "positive",
+      "turns": [
+        "Grill me on this launch plan and find the assumptions most likely to make it fail."
+      ],
+      "expectedSkills": ["stress-test"],
+      "expectedBehavior": [
+        "Establish the intended launch outcome and select a focused challenge method.",
+        "Rank assumptions or failure modes by impact and plausibility.",
+        "End with mitigations and validation steps."
+      ],
+      "forbiddenBehavior": [
+        "Ask an endless generic checklist one question at a time.",
+        "Replace the launch plan before demonstrating a material weakness."
+      ]
+    },
+    {
+      "id": "stress-test-adjacent-neutral-comparison",
+      "focusSkill": "stress-test",
+      "boundary": "adjacent",
+      "turns": [
+        "Compare these two viable plans neutrally and recommend one using our criteria."
+      ],
+      "expectedSkills": ["decision-support"],
+      "expectedBehavior": [
+        "Compare both plans against the stated criteria."
+      ],
+      "forbiddenBehavior": [
+        "Red-team both plans when the user asked for neutral selection."
+      ]
+    },
+    {
+      "id": "stress-test-explicit-one-at-a-time",
+      "focusSkill": "stress-test",
+      "boundary": "conflict",
+      "turns": [
+        "Stress-test my strategy. Ask exactly one question at a time because each answer may change the next branch."
+      ],
+      "expectedSkills": ["stress-test"],
+      "expectedBehavior": [
+        "Honor the explicit one-question-at-a-time cadence.",
+        "Explain which material assumption each question tests."
+      ],
+      "forbiddenBehavior": [
+        "Batch independent questions against the user's explicit cadence request.",
+        "Treat the cadence request as permission for an unbounded interview."
+      ]
+    },
+    {
+      "id": "stress-test-stop-after-material-risks",
+      "focusSkill": "stress-test",
+      "boundary": "over_following",
+      "turns": [
+        "Give me the three material failure modes for this plan, their mitigations, and then stop."
+      ],
+      "expectedSkills": ["stress-test"],
+      "expectedBehavior": [
+        "Return at most three material failure modes with mitigations and stop."
+      ],
+      "forbiddenBehavior": [
+        "Continue into remote edge cases or another interview round.",
+        "Use question volume as evidence of rigor."
+      ]
+    },
+    {
+      "id": "engineering-judgment-authentication-bug",
+      "focusSkill": "engineering-judgment",
+      "boundary": "positive",
+      "turns": [
+        "Fix this intermittent authentication failure and verify the behavior."
+      ],
+      "expectedSkills": ["engineering-judgment"],
+      "expectedBehavior": [
+        "Inspect repository evidence, identify the responsible boundary, implement the complete fix, and run focused proof."
+      ],
+      "forbiddenBehavior": [
+        "Guess at the cause without inspecting discoverable evidence.",
+        "Claim success from compilation alone when runtime behavior is the acceptance condition."
+      ]
+    },
+    {
+      "id": "engineering-judgment-adjacent-concept-explanation",
+      "focusSkill": "engineering-judgment",
+      "boundary": "adjacent",
+      "turns": [
+        "Explain what OAuth means for a product team. Do not change any software."
+      ],
+      "expectedSkills": [],
+      "expectedBehavior": [
+        "Explain the concept without starting repository investigation or implementation."
+      ],
+      "forbiddenBehavior": [
+        "Activate an engineering change workflow."
+      ]
+    },
+    {
+      "id": "engineering-judgment-project-architecture-authority",
+      "focusSkill": "engineering-judgment",
+      "boundary": "conflict",
+      "turns": [
+        "Implement this feature using the responsibility boundary mandated by the repository, even if another architecture is usually preferred."
+      ],
+      "expectedSkills": ["engineering-judgment"],
+      "expectedBehavior": [
+        "Follow the repository's established responsibility boundary unless it prevents a correct complete outcome."
+      ],
+      "forbiddenBehavior": [
+        "Replace project architecture with a generic preferred pattern without necessity."
+      ]
+    },
+    {
+      "id": "engineering-judgment-stop-at-requested-fix",
+      "focusSkill": "engineering-judgment",
+      "boundary": "over_following",
+      "turns": [
+        "Fix only this authentication bug and its focused regression proof. Do not clean up adjacent code."
+      ],
+      "expectedSkills": ["engineering-judgment"],
+      "expectedBehavior": [
+        "Complete the focused fix and regression proof while preserving unrelated behavior."
+      ],
+      "forbiddenBehavior": [
+        "Add adjacent refactors, dependency upgrades, or speculative abstractions after acceptance passes."
+      ]
+    }
+  ]
+}

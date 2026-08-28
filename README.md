@@ -2,11 +2,11 @@
 
 # Cynos Guidance
 
-Portable engineering judgment and project communication guidance for AI coding agents.
+Portable system guidance and cohesive on-demand Skills for AI agents.
 
-Cynos Guidance is a Pi package that combines a small always-on system guidance block with cohesive Agent Skills. It teaches durable judgment rather than prescribing one framework, repository layout, or detailed engineering workflow.
+Cynos Guidance is a Pi package that combines a small cross-domain system guidance block with independently triggered Agent Skills. The core establishes a consistent behavior and communication baseline; Skills add deeper dialogue or domain judgment only when a task needs them.
 
-Pi is the first supported harness. The guidance content remains harness-neutral so future adapters can reuse it without rewriting the principles or Skills.
+Pi is the first supported harness. The content remains harness-neutral so future adapters can reuse it without rewriting the guidance or Skills.
 
 ## Install and update with Pi
 
@@ -36,9 +36,71 @@ pi install https://github.com/cynos-ai/guidance
 
 Restart Pi after installation. Use `pi config` to inspect or disable individual resources.
 
-## How the Pi package works
+## How it composes
 
-`package.json` declares one extension and the public Skills:
+```text
+Domain Skill      → what task work and evidence are required
+Dialogue Skill    → how a particular conversation advances
+Always-on core    → how every response is grounded and presented
+User instruction → explicit depth, cadence, and artifact format
+```
+
+The layers compose without depending on each other. For example, a software migration choice may use both `engineering-judgment` and `decision-support`, while a purchasing decision may use only `decision-support`.
+
+## Always-on core
+
+The Pi extension injects [`principles/core.md`](principles/core.md) once per turn. The compact core asks the agent to:
+
+- ground claims in available context;
+- preserve the user's intended outcome rather than narrowing it to a convenient mechanism;
+- match the user's domain knowledge and lead with the useful answer;
+- disclose mechanisms and evidence progressively;
+- distinguish facts, inferences, recommendations, unknowns, and blockers;
+- propagate user corrections through dependent conclusions;
+- ask only path-changing questions and avoid ceremonial confirmation;
+- preserve requested artifact conventions, safety boundaries, and truthful verification;
+- stop when the requested outcome is satisfied.
+
+## Skills
+
+Pi recursively discovers the public Skills under `skills/`.
+
+### Communication
+
+Communication Skills are domain-neutral and organized by dialogue intent.
+
+| Skill | Responsibility |
+|---|---|
+| [`guided-discovery`](skills/communication/guided-discovery/SKILL.md) | Clarify an ambiguous goal, problem, idea, requirement, or desired outcome through guided questions and stable end-to-end modeling when needed. |
+| [`decision-support`](skills/communication/decision-support/SKILL.md) | Organize a defined choice using criteria, evidence, trade-offs, a recommendation, and bounded validation needs. |
+| [`stress-test`](skills/communication/stress-test/SKILL.md) | Challenge an existing plan, argument, strategy, or design using focused assumption probes, adverse scenarios, premortems, or alternatives. |
+
+### Engineering
+
+Domain Skills own task judgment in a declared domain.
+
+| Skill | Responsibility |
+|---|---|
+| [`engineering-judgment`](skills/engineering/engineering-judgment/SKILL.md) | Guide software design, change, diagnosis, refactoring, optimization, migration, and verification as one coherent engineering job. |
+
+Project-maintenance Skills under `.pi/skills/` help maintain Cynos Guidance itself and are excluded from the npm package.
+
+## Migrating from 0.1.x
+
+Version `0.2.0` removes `project-owner-communication` without a compatibility alias. Its responsibilities move as follows:
+
+| Previous use | New owner |
+|---|---|
+| Ordinary explanations, change reports, and failure descriptions | Always-on core; no Skill command required |
+| Clarifying a goal, outcome, or boundary | `guided-discovery` |
+| Choosing among options, vendors, models, or routes | `decision-support` |
+| Grilling, red-teaming, or running a premortem on a proposal | `stress-test` |
+
+The `engineering-judgment` Skill name remains unchanged. Its nested package path does not change `/skill:engineering-judgment` or automatic activation.
+
+## Package behavior
+
+`package.json` declares one extension and one recursive Skill root:
 
 ```json
 {
@@ -49,50 +111,24 @@ Restart Pi after installation. Use `pi config` to inspect or disable individual 
 }
 ```
 
-The extension injects [`principles/core.md`](principles/core.md) into the system prompt once per turn and uses a stable marker to avoid duplicate injection. Pi discovers the two standard Agent Skills under `skills/`.
-
-The extension registers no tools, accesses no network, and edits no project files. Prompt guidance is advice, not a security or authorization boundary.
-
-## Included guidance
-
-### Always-on core
-
-The compact core asks the agent to:
-
-- inspect actual project context before assuming;
-- fit changes to existing responsibility boundaries;
-- prefer the simplest complete solution;
-- preserve safety, compatibility, and explicit failure handling;
-- verify claims and stop when the requested outcome is complete;
-- explain project work from user-observable behavior toward implementation detail.
-
-### Skills
-
-| Skill | Responsibility |
-|---|---|
-| [`engineering-judgment`](skills/engineering-judgment/SKILL.md) | Guide software design, change, diagnosis, refactoring, optimization, migration, and verification as one coherent engineering job. |
-| [`project-owner-communication`](skills/project-owner-communication/SKILL.md) | Explain, research, jointly shape, decide, or stress-test project direction with a domain-expert owner who does not work from code or internal project names. |
-
-The communication Skill combines one outcome-first presentation kernel with on-demand dialogue modes for Socratic discovery and decisions, technical research briefings, and rigorous stress tests such as grilling or premortems. This avoids competing Skills imposing different question cadence on the same conversation.
-
-The two public Skills remain independent: one shapes engineering work, and the other shapes owner-facing conversation. They can activate together without depending on each other.
-
-Project-maintenance Skills under `.pi/skills/` help maintain Cynos Guidance itself and are excluded from the npm package.
+The extension only modifies the system prompt. It registers no tools, accesses no network, and edits no project files. Prompt guidance is advice, not a security or authorization boundary.
 
 ## Design boundary
 
 Cynos Guidance favors:
 
+- a small permanent baseline plus on-demand detail;
+- Skills with independent triggers and standalone outcomes;
+- communication modes separated from domain task judgment;
 - portable judgment over technology-specific recipes;
-- a small permanent prompt plus on-demand detail;
-- cohesive Skills organized by user intent;
-- observable behavior, explicit boundaries, and clear stop conditions;
-- English for all system guidance and Skill content.
+- observable behavior, explicit evidence boundaries, and clear stop conditions;
+- English for all shipped system guidance and Skill content.
 
 It is not:
 
-- a complete coding-agent runtime;
-- a framework-specific best-practices handbook;
+- a complete agent runtime or universal Skill marketplace;
+- a fixed conversation framework applied to every request;
+- a framework-specific engineering handbook;
 - a repository's project memory;
 - a workflow or approval engine;
 - a substitute for tests, permissions, sandboxing, or review;
@@ -108,7 +144,7 @@ npm run verify
 npm run pack:dry-run
 ```
 
-The tests validate Pi prompt injection, Skill metadata and cohesion boundaries, trigger-case coverage, English-only prompt and Skill content, and the public package surface.
+Deterministic tests validate package structure, prompt injection, Skill metadata, links, language, and behavior-probe schema. [`evaluations/behavior-probes.json`](evaluations/behavior-probes.json) is a qualitative review inventory; CI does not claim to test model routing or response quality.
 
 ## Release
 
@@ -120,7 +156,7 @@ Releases use npm Trusted Publishing through [`.github/workflows/release.yml`](.g
 - environment: leave empty;
 - allowed action: `npm publish`.
 
-After configuration, pushing a version tag such as `v0.1.0` verifies the package, publishes it to npm, and creates a GitHub Release containing the tarball.
+After configuration, pushing a version tag such as `vX.Y.Z` verifies the package, publishes it to npm, and creates a GitHub Release containing the tarball.
 
 ## License
 

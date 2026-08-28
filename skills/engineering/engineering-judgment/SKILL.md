@@ -14,7 +14,7 @@ Deliver the simplest complete outcome that fits the system. Keep investigation, 
 - Derive the requested outcome, observable acceptance, constraints, and explicit non-goals.
 - Inspect relevant code, tests, types, configuration, and project guidance before asking for discoverable facts.
 - Separate observed behavior from inferred causes.
-- Ask only about choices that materially change product behavior, public contracts, security, data, cost, or hard-to-reverse direction. When asking, present one focused question and a recommended default.
+- Ask only about choices that materially change product behavior, public contracts, security, data, cost, or hard-to-reverse direction. Explain what each question unlocks and provide a recommended default when evidence supports one; let explicit user instructions or applicable dialogue guidance control cadence.
 
 ### 2. Find the responsible boundary
 

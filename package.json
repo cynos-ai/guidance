@@ -1,12 +1,15 @@
 {
   "name": "@cynos-ai/guidance",
   "version": "0.2.0",
-  "description": "Portable engineering judgment and project communication guidance for AI coding agents.",
+  "description": "Portable system guidance and cohesive on-demand Skills for AI agents.",
   "keywords": [
     "pi-package",
     "pi-extension",
     "agent-skills",
+    "ai-agent",
     "coding-agent",
+    "decision-support",
+    "human-ai-interaction",
     "system-prompt",
     "cynos"
   ],
